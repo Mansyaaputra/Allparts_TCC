@@ -130,7 +130,7 @@ class Product extends BasePage {
       <div className="container is-widescreen">
         <div className="container">
           <h2 className="title has-text-link-dark has-text-centered">
-            🏍️ Daftar Sparepart Motor
+            Allparts Motorcycle Menu
           </h2>
 
           {/* Filter kategori di atas grid produk */}
@@ -208,9 +208,9 @@ class Product extends BasePage {
                 <div
                   className="card"
                   style={{
-                    border: "2px solid #ffe082",
+                    border: "2.5px solid #1976d2", // biru
                     borderRadius: 16,
-                    boxShadow: "0 6px 24px 0 rgba(255,224,130,0.13)",
+                    boxShadow: "0 6px 24px 0 rgba(25,118,210,0.13)",
                     transition: "transform 0.2s, box-shadow 0.2s",
                     overflow: "hidden",
                     background: "#fffde7",
@@ -218,12 +218,12 @@ class Product extends BasePage {
                   onMouseEnter={(e) => {
                     e.currentTarget.style.transform = "scale(1.03)";
                     e.currentTarget.style.boxShadow =
-                      "0 12px 32px 0 rgba(255,224,130,0.18)";
+                      "0 12px 32px 0 rgba(25,118,210,0.18)";
                   }}
                   onMouseLeave={(e) => {
                     e.currentTarget.style.transform = "none";
                     e.currentTarget.style.boxShadow =
-                      "0 6px 24px 0 rgba(255,224,130,0.13)";
+                      "0 6px 24px 0 rgba(25,118,210,0.13)";
                   }}
                 >
                   <div
