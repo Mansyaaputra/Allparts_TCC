@@ -27,20 +27,41 @@ function EditProduct() {
   }, [id]);
 
   const handleChange = (e) => {
-    setProduct({ ...product, [e.target.name]: e.target.value });
+    if (e.target.type === "file") {
+      setProduct({ ...product, image: e.target.files[0] });
+    } else {
+      setProduct({ ...product, [e.target.name]: e.target.value });
+    }
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
       const token = localStorage.getItem("token");
-      await axios.put(`/api/products/${id}`, product, {
-        headers: { Authorization: `Bearer ${token}` },
-      });
+      const formData = new FormData();
+      formData.append("name", product.name);
+      formData.append("price", product.price);
+      formData.append("stock", product.stock);
+      formData.append("description", product.description);
+      formData.append("category", product.category);
+      if (product.image) {
+        formData.append("image", product.image);
+      }
+      const config = {
+        headers: {
+          "Content-Type": "multipart/form-data",
+          Authorization: `Bearer ${token}`,
+        },
+      };
+      await axios.put(`/api/products/${id}`, formData, config);
       alert("Produk berhasil diupdate!");
       navigate("/products");
     } catch (err) {
-      setError("Gagal update produk");
+      setError(
+        err.response?.data?.message ||
+        err.response?.data?.error ||
+        "Gagal update produk"
+      );
     }
   };
 
@@ -209,9 +230,8 @@ function EditProduct() {
               <input
                 className="input"
                 type="file"
-                name="image_url"
+                name="image"
                 accept="image/jpeg, image/jpg"
-                value={""}
                 onChange={handleChange}
                 style={{
                   borderColor: "var(--red)",
